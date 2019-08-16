@@ -107,6 +107,11 @@ export class Visual implements IVisual {
         /** Parse our mapped data and view the output */
             console.log(data);
 
+        /** Set the dimensions and margins of the graph */
+            var margin = {top: 10, right: 30, bottom: 30, left: 60},
+                width = options.viewport.width - margin.left - margin.right,
+                height = options.viewport.height - margin.top - margin.bottom;
+
     }
 
     private static parseSettings(dataView: DataView): VisualSettings {
