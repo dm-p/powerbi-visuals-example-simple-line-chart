@@ -37,6 +37,7 @@ import VisualObjectInstance = powerbi.VisualObjectInstance;
 import DataView = powerbi.DataView;
 import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnumerationObject;
 import { VisualSettings } from './settings';
+import * as d3 from 'd3';
 
 /** This specifices the 'shape' of the data in each row. */
     interface ILineChartRow {
