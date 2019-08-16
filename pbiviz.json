@@ -1,1 +1,25 @@
-{"visual":{"name":"d3LineChartExample","displayName":"d3LineChartExample","guid":"d3LineChartExample313DC31569204B798A9C88D7363C4760","visualClassName":"Visual","version":"1.0.0","description":"","supportUrl":"","gitHubUrl":""},"apiVersion":"2.6.0","author":{"name":"","email":""},"assets":{"icon":"assets/icon.png"},"externalJS":null,"style":"style/visual.less","capabilities":"capabilities.json","dependencies":null,"stringResources":[]}
+{
+    "visual": {
+        "name": "d3LineChartExample",
+        "displayName": "d3LineChartExample",
+        "guid": "d3LineChartExample313DC31569204B798A9C88D7363C4760",
+        "visualClassName": "Visual",
+        "version": "1.0.0",
+        "description": "",
+        "supportUrl": "",
+        "gitHubUrl": ""
+    },
+    "apiVersion": "2.6.0",
+    "author": {
+        "name": "",
+        "email": ""
+    },
+    "assets": {
+        "icon": "assets/icon.png"
+    },
+    "externalJS": null,
+    "style": "style/visual.less",
+    "capabilities": "capabilities.json",
+    "dependencies": null,
+    "stringResources": []
+}
