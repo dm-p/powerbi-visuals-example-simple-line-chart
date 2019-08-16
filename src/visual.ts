@@ -64,6 +64,9 @@ export class Visual implements IVisual {
         console.log('Visual update', options);
         this.settings = Visual.parseSettings(options && options.dataViews && options.dataViews[0]);
         
+        /** Clear down existing plot */
+            this.container.selectAll('*').remove();
+
         /** Test 1: Data view has both fields added */
             let dataViews = options.dataViews;
             console.log('Test 1: Valid data view...');
