@@ -53,6 +53,11 @@ export class Visual implements IVisual {
     constructor(options: VisualConstructorOptions) {
         console.log('Visual constructor', options);
         this.target = options.element;
+
+        /** Create the chart container when the visual loads */
+            this.container = d3.select(this.target)
+                .append('div')
+                    .attr('id', 'my_dataviz');
     }
 
     public update(options: VisualUpdateOptions) {
