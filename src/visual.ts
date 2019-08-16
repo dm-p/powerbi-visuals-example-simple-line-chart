@@ -48,6 +48,7 @@ import * as d3 from 'd3';
 export class Visual implements IVisual {
     private target: HTMLElement;
     private settings: VisualSettings;
+    private container: d3.Selection<HTMLDivElement, any, HTMLDivElement, any>;
 
     constructor(options: VisualConstructorOptions) {
         console.log('Visual constructor', options);
