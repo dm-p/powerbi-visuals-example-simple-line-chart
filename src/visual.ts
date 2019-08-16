@@ -24,11 +24,11 @@
  *  THE SOFTWARE.
  */
 
-"use strict";
+'use strict';
 
-import "core-js/stable";
-import "./../style/visual.less";
-import powerbi from "powerbi-visuals-api";
+import 'core-js/stable';
+import './../style/visual.less';
+import powerbi from 'powerbi-visuals-api';
 import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
 import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import IVisual = powerbi.extensibility.visual.IVisual;
@@ -36,7 +36,7 @@ import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInst
 import VisualObjectInstance = powerbi.VisualObjectInstance;
 import DataView = powerbi.DataView;
 import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnumerationObject;
-import { VisualSettings } from "./settings";
+import { VisualSettings } from './settings';
 
 /** This specifices the 'shape' of the data in each row. */
     interface ILineChartRow {
