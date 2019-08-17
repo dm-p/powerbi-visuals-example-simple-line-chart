@@ -3,7 +3,7 @@
 This is a very simple demonstration of migrating a regular d3.js line chart into the Power BI Custom Visuals SDK, and is documented in these online posts:
 
 * [Lifting and Shifting a Simple d3.js Line Chart into A Power BI Custom Visual (Part 1)](https://coacervo.co/examples/d3-line-chart-1)
-* Lifting and Shifting a Simple d3.js Line Chart into A Power BI Custom Visual (Part 2) - TBC
+* [Lifting and Shifting a Simple d3.js Line Chart into A Power BI Custom Visual (Part 2)](https://coacervo.co/examples/d3-line-chart-2)
 
 Please refer to these articles for further details.
 
