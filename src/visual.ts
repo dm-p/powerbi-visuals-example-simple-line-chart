@@ -24,11 +24,11 @@
  *  THE SOFTWARE.
  */
 
-"use strict";
+'use strict';
 
-import "core-js/stable";
-import "./../style/visual.less";
-import powerbi from "powerbi-visuals-api";
+import 'core-js/stable';
+import './../style/visual.less';
+import powerbi from 'powerbi-visuals-api';
 import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
 import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import IVisual = powerbi.extensibility.visual.IVisual;
@@ -36,7 +36,8 @@ import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInst
 import VisualObjectInstance = powerbi.VisualObjectInstance;
 import DataView = powerbi.DataView;
 import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnumerationObject;
-import { VisualSettings } from "./settings";
+import { VisualSettings } from './settings';
+import * as d3 from 'd3';
 
 /** This specifices the 'shape' of the data in each row. */
     interface ILineChartRow {
@@ -47,16 +48,25 @@ import { VisualSettings } from "./settings";
 export class Visual implements IVisual {
     private target: HTMLElement;
     private settings: VisualSettings;
+    private container: d3.Selection<HTMLDivElement, any, HTMLDivElement, any>;
 
     constructor(options: VisualConstructorOptions) {
         console.log('Visual constructor', options);
         this.target = options.element;
+
+        /** Create the chart container when the visual loads */
+            this.container = d3.select(this.target)
+                .append('div')
+                    .attr('id', 'my_dataviz');
     }
 
     public update(options: VisualUpdateOptions) {
         console.log('Visual update', options);
         this.settings = Visual.parseSettings(options && options.dataViews && options.dataViews[0]);
         
+        /** Clear down existing plot */
+            this.container.selectAll('*').remove();
+
         /** Test 1: Data view has both fields added */
             let dataViews = options.dataViews;
             console.log('Test 1: Valid data view...');
@@ -99,6 +109,46 @@ export class Visual implements IVisual {
 
         /** Parse our mapped data and view the output */
             console.log(data);
+
+        /** Set the dimensions and margins of the graph */
+            var margin = {top: 10, right: 30, bottom: 30, left: 60},
+                width = options.viewport.width - margin.left - margin.right,
+                height = options.viewport.height - margin.top - margin.bottom;
+
+        /** Append the svg object to the body of the page */
+            var svg = this.container
+                .append('svg')
+                    .attr('width', width + margin.left + margin.right)
+                    .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                    .attr('transform',
+                        'translate(' + margin.left + ',' + margin.top + ')');
+
+        /** Add X axis --> it is a date format */
+            var x = d3.scaleTime()
+                .domain(d3.extent(data, function(d) { return d.date; }))
+                .range([ 0, width ]);
+            svg.append('g')
+                .attr('transform', 'translate(0,' + height + ')')
+                .call(d3.axisBottom(x));
+
+        /** Add Y axis */
+            var y = d3.scaleLinear()
+                .domain([0, d3.max(data, function(d) { return +d.value; })])
+                .range([ height, 0 ]);
+            svg.append('g')
+                .call(d3.axisLeft(y));
+
+        /** Add the line */
+            svg.append('path')
+                .datum(data)
+                    .attr('fill', 'none')
+                    .attr('stroke', 'steelblue')
+                    .attr('stroke-width', 1.5)
+                    .attr('d', d3.line<ILineChartRow>()
+                        .x(function(d) { return x(d.date) })
+                        .y(function(d) { return y(d.value) })
+                    )
 
     }
 
